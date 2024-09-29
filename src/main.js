@@ -82,95 +82,27 @@ function displayImages(images) {
   gallery.insertAdjacentHTML('beforeend', markup);
 }
 
-// Elementy DOM
-const searchForm = document.getElementById('search-form');
-const searchInput = document.getElementById('search-input');
-const gallery = document.getElementById('gallery');
-const loader = document.getElementById('loader');
+const loader = document.querySelector('.loader');
 
-// Inicjalizacja SimpleLightbox
-let lightbox = new SimpleLightbox('.gallery a');
+async function loadImages() {
+  loader.style.display = 'block'; // Pokaż loader
+  loadMoreBtn.style.display = 'none'; // Ukryj przycisk podczas ładowania
 
-// Funkcja pokazująca i ukrywająca loader
-function showLoader() {
-  loader.style.display = 'block';
-}
+  const images = await fetchImages(currentQuery, currentPage);
+  displayImages(images.hits);
 
-function hideLoader() {
-  loader.style.display = 'none';
-}
-
-// Pokaż loader
-loader.hidden = true;
-
-try {
-  showLoader();
-  const response = await fetch(url);
-  const data = await response.json();
-
-  hideLoader();
-
-  // Czyszczenie galerii przed dodaniem nowych wyników
-  clearGallery();
-
-  // Ukryj loader
-  loader.hidden = false;
-
-  if (data.hits.length === 0) {
-    // Wyświetlanie komunikatu iziToast
-    iziToast.error({
-      title: 'Error',
-      message:
-        'Sorry, there are no images matching your search query. Please try again!',
-    });
-  } else {
-    // Wyświetlanie obrazów
-    displayImages(data.hits);
-    // Odświeżenie lightboxa po dodaniu nowych elementów
-    lightbox.refresh();
+  loader.style.display = 'none'; // Ukryj loader po załadowaniu
+  if (currentPage * 40 < images.totalHits) {
+    loadMoreBtn.style.display = 'block'; // Pokaż przycisk, jeśli są więcej obrazy
   }
-} catch (error) {
-  // Ukryj loader w przypadku błędu
-  loader.hidden = true;
-  console.error('Error fetching images from Pixabay:', error);
 }
 
-// Funkcja do wyświetlania obrazów w galerii
-const displayImages = images => {
-  images.forEach(image => {
-    const card = document.createElement('div');
-    card.classList.add('card');
+const form = document.querySelector('form');
+const gallery = document.querySelector('.gallery');
+const loadMoreBtn = document.querySelector('.load-more');
+const endMessage = document.querySelector('.end-message');
+const loader = document.querySelector('.loader');
 
-    card.innerHTML = `
-            <a href="${image.largeImageURL}">
-                <img src="${image.webformatURL}" alt="${image.tags}">
-            </a>
-            <div class="stats">
-                <span class="span">Likes
-                ${image.likes}</span>
-                <span class="span">Views 
-                ${image.views}</span>
-                <span class="span">Comments 
-                ${image.comments}</span>
-                <span class="span">Downloads 
-                ${image.downloads}</span>
-            </div>
-        `;
-
-    gallery.appendChild(card);
-  });
-};
-
-// Funkcja do czyszczenia galerii
-const clearGallery = () => {
-  gallery.innerHTML = '';
-};
-
-// Obsługa formularza wyszukiwania
-searchForm.addEventListener('submit', e => {
-  e.preventDefault();
-  const query = searchInput.value.trim();
-  if (query !== '') {
-    searchImages(query);
-  }
-});
+// Ukryj przycisk i komunikat na początku
+loadMoreBtn.style.display = 'none';
+endMessage.style.display = 'none';
