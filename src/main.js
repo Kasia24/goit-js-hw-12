@@ -1,8 +1,3 @@
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-
 // Klucz API do Pixabay
 const apiKey = '46058905-76d6ace161caaf887286baf22'; // Wprowadź swój klucz API
 const form = document.getElementById('search-form');
