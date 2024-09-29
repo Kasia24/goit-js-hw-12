@@ -16,6 +16,7 @@
 @import url('./badges.css');
 @import url('./back-link.css');
 @import url('./footer.css');
+
 #search-form {
   display: flex;
   flex-direction: row;
