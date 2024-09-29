@@ -20,6 +20,8 @@ async function fetchImages(query, page = 1) {
     throw error;
   }
 }
+let currentQuery = '';
+let currentPage = 1;
 
 // Elementy DOM
 const searchForm = document.getElementById('search-form');
@@ -30,50 +32,49 @@ const loader = document.getElementById('loader');
 // Inicjalizacja SimpleLightbox
 let lightbox = new SimpleLightbox('.gallery a');
 
-  // Funkcja pokazująca i ukrywająca loader
-  function showLoader() {
-    loader.style.display = 'block';
-  }
+// Funkcja pokazująca i ukrywająca loader
+function showLoader() {
+  loader.style.display = 'block';
+}
 
-  function hideLoader() {
-    loader.style.display = 'none';
-  }
+function hideLoader() {
+  loader.style.display = 'none';
+}
 
-  // Pokaż loader
+// Pokaż loader
+loader.hidden = true;
+
+try {
+  showLoader();
+  const response = await fetch(url);
+  const data = await response.json();
+
+  hideLoader();
+
+  // Czyszczenie galerii przed dodaniem nowych wyników
+  clearGallery();
+
+  // Ukryj loader
+  loader.hidden = false;
+
+  if (data.hits.length === 0) {
+    // Wyświetlanie komunikatu iziToast
+    iziToast.error({
+      title: 'Error',
+      message:
+        'Sorry, there are no images matching your search query. Please try again!',
+    });
+  } else {
+    // Wyświetlanie obrazów
+    displayImages(data.hits);
+    // Odświeżenie lightboxa po dodaniu nowych elementów
+    lightbox.refresh();
+  }
+} catch (error) {
+  // Ukryj loader w przypadku błędu
   loader.hidden = true;
-
-  try {
-    showLoader();
-    const response = await fetch(url);
-    const data = await response.json();
-
-    hideLoader();
-
-    // Czyszczenie galerii przed dodaniem nowych wyników
-    clearGallery();
-
-    // Ukryj loader
-    loader.hidden = false;
-
-    if (data.hits.length === 0) {
-      // Wyświetlanie komunikatu iziToast
-      iziToast.error({
-        title: 'Error',
-        message:
-          'Sorry, there are no images matching your search query. Please try again!',
-      });
-    } else {
-      // Wyświetlanie obrazów
-      displayImages(data.hits);
-      // Odświeżenie lightboxa po dodaniu nowych elementów
-      lightbox.refresh();
-    }
-  } catch (error) {
-    // Ukryj loader w przypadku błędu
-    loader.hidden = true;
-    console.error('Error fetching images from Pixabay:', error);
-  }
-};
+  console.error('Error fetching images from Pixabay:', error);
+}
 
 // Funkcja do wyświetlania obrazów w galerii
 const displayImages = images => {
