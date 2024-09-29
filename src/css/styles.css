@@ -175,7 +175,7 @@ img {
   display: none;
   text-align: center;
 }
-.load-more {
+#load-more {
   background-color: rgba(78, 117, 255, 1);
   color: rgba(255, 255, 255, 1);
   font-family: Montserrat;
