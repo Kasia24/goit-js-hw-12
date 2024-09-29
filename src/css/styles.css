@@ -190,6 +190,9 @@ img {
   left: 657px;
   padding: 8px 16px 8px 16px;
   gap: 10px;
-  border-radius: 8px 0px 0px 0px;
+  border-radius: 8px 8px 8px 8px;
   opacity: 0px;
+  text-align: center;
+  justify-content: center;
+  gap: 32px;
 }
