@@ -193,6 +193,6 @@ img {
   justify-content: center;
   gap: 32px;
   display: flex;
-  margin: 32px;
-  left: 657px;
+  margin-top: 32px;
+  margin-left: 657px;
 }
