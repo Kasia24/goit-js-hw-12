@@ -1,7 +1,3 @@
-import axios from 'axios';
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
-
 // Konfiguracja API Pixabay
 const API_KEY = '46058905-76d6ace161caaf887286baf22';
 const BASE_URL = 'https://pixabay.com/api/';
