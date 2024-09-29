@@ -11,6 +11,9 @@ const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 const loader = document.querySelector('#loader');
 
+// Inicjalizacja SimpleLightbox
+let lightbox = new SimpleLightbox('.gallery a');
+
 // Funkcja do pobierania obrazów z Pixabay API
 async function fetchImages(query, page) {
   try {
