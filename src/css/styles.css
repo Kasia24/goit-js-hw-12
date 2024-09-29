@@ -174,3 +174,21 @@ img {
   display: none;
   text-align: center;
 }
+.load-more {
+  background-color: rgba(78, 117, 255, 1);
+  color: rgba(255, 255, 255, 1);
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0.04em;
+  text-align: left;
+  width: 125px;
+  height: 40px;
+  top: 1236px;
+  left: 657px;
+  padding: 8px 16px 8px 16px;
+  gap: 10px;
+  border-radius: 8px 0px 0px 0px;
+  opacity: 0px;
+}
