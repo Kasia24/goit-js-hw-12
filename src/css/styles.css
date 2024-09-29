@@ -24,6 +24,7 @@
   justify-content: center;
   opacity: 0px;
   gap: 8px;
+  margin: 36px;
 }
 .btn {
   width: 75px;
@@ -193,4 +194,5 @@ img {
   gap: 32px;
   display: flex;
   flex-direction: row;
+  margin: 32px;
 }
