@@ -17,20 +17,22 @@
     <link rel="stylesheet" crossorigin href="/goit-js-hw-12/assets/styles-C0cIuRBN.css">
   </head>
   <body>
-    <form id="search-form">
-      <input
-        type="text"
-        id="search-input"
-        placeholder="Search images..."
-        required
-      />
-      <button type="submit" class="btn">Start</button>
-    </form>
-    <div class="loading-indicator" id="loading-indicator">
-      <div class="loader"></div>
-      <p>Ładowanie...</p>
+    <div class="container">
+      <form id="search-form">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search images..."
+          required
+        />
+        <button type="submit" class="btn">Start</button>
+      </form>
+      <div class="loading-indicator" id="loading-indicator">
+        <div class="loader"></div>
+        <p>Ładowanie...</p>
+      </div>
+      <ul class="gallery" id="gallery"></ul>
     </div>
-    <ul class="gallery" id="gallery"></ul>
     <button id="load-more" style="display: none">Load more</button>
 
     <!-- Dodaj bibliotekę iziToast -->
