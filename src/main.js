@@ -23,10 +23,6 @@ async function fetchImages(query, page = 1) {
 let currentQuery = '';
 let currentPage = 1;
 
-const form = document.querySelector('form');
-const gallery = document.querySelector('.gallery');
-const loadMoreBtn = document.querySelector('.load-more');
-
 // Ukryj przycisk na początku
 loadMoreBtn.style.display = 'none';
 
